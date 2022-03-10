@@ -74,9 +74,6 @@ function PostPokemon() {
             console.log(lastPostedPokemon);
 
       }
-      // console.log("LAST POSTED POKEMON");
-      // console.log(lastPostedPokemon);
-      // console.log("-----------------------------");
 
       function handleDeleteType(e, deleteType) {
             e.preventDefault();
@@ -109,8 +106,8 @@ function PostPokemon() {
 
                         <form onSubmit={(e) => handleSubmit(e)}>
                               <div className={styles.title}>
-                                    <label className={styles.label}>Pokemon name</label>
-                                    <input type="text" name="name" value={input.name} className={`${styles.input_text} ${errors.name && styles.danger}`}
+                                    <label className={styles.label} htmlFor="name">Pokemon name</label>
+                                    <input id='name' type="text" name="name" value={input.name} className={`${styles.input_text} ${errors.name && styles.danger}`}
                                           onChange={(e) => handleInputChange(e)}
                                           autoComplete='off'
                                           required />

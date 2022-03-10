@@ -7,7 +7,6 @@
         "@testing-library/react": "^11.2.1",
         "@testing-library/user-event": "^12.2.2",
         "enzyme": "^3.11.0",
-        "jest-css-modules": "^2.1.0",
         "jest-transform-stub": "^2.0.0",
         "react": "^17.0.1",
         "react-dom": "^17.0.1",
@@ -17,6 +16,11 @@
         "redux-mock-store": "^1.5.4",
         "redux-thunk": "^2.4.1",
         "web-vitals": "^0.2.4"
+    },
+    "jest": {
+        "moduleNameMapper": {
+            "\\.(css|less|scss|sss|styl)$": "<rootDir>/node_modules/jest-css-modules"
+        }
     },
     "scripts": {
         "start": "react-scripts --openssl-legacy-provider start",
@@ -46,6 +50,7 @@
         "@wojtekmaj/enzyme-adapter-react-17": "^0.6.6",
         "chai": "^4.3.6",
         "jest": "^26.6.0",
+        "jest-css-modules": "^2.1.0",
         "react-test-renderer": "^17.0.2"
     }
 }
