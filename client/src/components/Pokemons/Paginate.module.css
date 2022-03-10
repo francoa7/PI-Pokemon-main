@@ -1,0 +1,35 @@
+.page_numbers {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    background-color: #1d2c5e;
+    width: fit-content;
+    margin: auto;
+    padding: 0 10px;
+    margin-bottom: 1rem;
+    border-radius: 20px;
+}
+.number {
+    font-family: "Fredoka", sans-serif;
+    font-weight: bolder;
+    margin: 10px;
+    background-color: #fff;
+    border: none;
+    border-radius: 20px;
+    color: #f10404;
+}
+
+.number:hover {
+    cursor: pointer;
+}
+.single_pager {
+    border-radius: 20px;
+    border: none;
+    font-family: "Architects Daughter", cursive;
+    font-weight: bolder;
+    color: #fff;
+    background-color: transparent;
+}
+.single_pager:hover {
+    cursor: pointer;
+}

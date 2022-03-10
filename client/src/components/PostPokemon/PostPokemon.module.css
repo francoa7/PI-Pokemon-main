@@ -1,0 +1,143 @@
+.page_container {
+    display: flex;
+    height: 100vh;
+    background-color: #ffffff;
+    width: 100vw;
+    font-family: "Architects Daughter", cursive;
+    font-weight: bolder;
+}
+select {
+    font-family: "Architects Daughter", cursive;
+    font-weight: bolder;
+}
+input {
+    font-family: "Architects Daughter", cursive;
+    font-weight: bolder;
+}
+.image_container {
+    box-shadow: 0px 0px 10px #000;
+    flex-grow: 1;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    background-color: #ddd9d9;
+    min-width: 300px;
+    height: 100vh;
+    flex-direction: column;
+}
+.go_back {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    text-decoration: none;
+    background-color: #17a0c2;
+    padding: 14px 20px;
+    border-radius: 10px;
+    border: none;
+    color: #fff;
+}
+
+.default_pokemon {
+    z-index: 2;
+    width: 300px;
+}
+.form_container {
+    padding: 3rem;
+    padding-left: 5rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.title {
+    display: flex;
+    flex-direction: column;
+}
+.label {
+    display: block;
+    text-align: start;
+}
+
+.input_text {
+    outline: none;
+    border: none;
+    border-bottom: 1px solid #17a0c2;
+    padding: 0.5rem;
+    margin-bottom: 3rem;
+    transition: 0.3s;
+}
+
+.input_text:focus {
+    background-color: #d3d1d1;
+}
+
+.input_number {
+    outline: none;
+    border: none;
+    border-bottom: 1px solid #17a0c2;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    margin-top: 0.5rem;
+    transition: 0.3s;
+    width: 2rem;
+    text-align: center;
+}
+
+.stats_group {
+    width: 50vw;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    max-height: 200px;
+    align-items: center;
+    justify-content: flex-end;
+}
+.stat {
+    display: flex;
+    flex-direction: column;
+    margin-top: 1rem;
+    align-items: center;
+}
+
+.types_list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: 1rem 8rem;
+    justify-content: center;
+    border: 1px solid #000;
+    width: 200px;
+}
+
+.stats {
+    display: flex;
+    flex-direction: column;
+    margin: 0 30rem;
+}
+.types_section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.selected_types {
+    display: flex;
+    flex-direction: row;
+}
+
+.selected_types > li {
+    margin: 0 1rem;
+}
+
+p.danger {
+    color: #ff0000;
+}
+
+p.succes {
+    color: #008000;
+}
+input.danger {
+    border-bottom: 1px solid #ff0000;
+}

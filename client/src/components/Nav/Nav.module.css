@@ -1,3 +1,54 @@
 .nav_bar {
-    background-color: #000;
+    top: 0;
+    width: 100%;
+    background-color: #041f5ebe;
+    position: fixed;
+    color: #fff;
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    font-family: "Fredoka", sans-serif;
+    box-shadow: 1px 0px 5px #000;
+}
+.filters {
+    display: flex;
+    flex-direction: row;
+    font-family: "Fredoka", sans-serif;
+}
+
+.select {
+    letter-spacing: 1.5px;
+    border-radius: 20px;
+    margin: 0 1rem;
+    text-align: center;
+    font-family: "Fredoka", sans-serif;
+    width: 100px;
+    height: 25px;
+}
+option {
+    font-family: "Fredoka", sans-serif;
+}
+
+.create_button {
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+    padding: 10px 15px;
+    background-color: #fff;
+    font-family: "Fredoka", sans-serif;
+    font-weight: bolder;
+    font-size: 1rem;
+    border: 1px solid #000;
+    border-radius: 100px;
+    color: #f10404;
+}
+
+.pokeball_drawing {
+    width: 20px;
+}
+
+.create_button:hover {
+    cursor: pointer;
 }

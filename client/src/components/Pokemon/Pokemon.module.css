@@ -1,0 +1,235 @@
+.poke_container {
+    background-color: #ffffff3b;
+    width: 180px;
+    padding: 1rem 3rem 2rem 3rem;
+    margin: 0.5rem;
+    border-radius: 25px;
+    border: 1px solid #000;
+    box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.35);
+    height: 370px;
+    flex-direction: column;
+    display: flex;
+    justify-content: space-between;
+}
+a {
+    font-family: "Fredoka", sans-serif;
+    font-weight: 400;
+    text-decoration: none;
+    font-size: 1.15rem;
+}
+
+.pokemon_name {
+    font-family: "Fredoka", sans-serif;
+    font-weight: 500;
+}
+.with_border {
+    text-shadow: -1px 1px 0 #000, 1px 1px 0 #000, 1px -1px 0 #000,
+        -1px -1px 0 #000;
+    /* -webkit-text-stroke-width: 2px;
+    -webkit-text-stroke-color: black; */
+}
+
+.broken_pokeball {
+    width: 200px;
+    max-height: 200px;
+    align-self: center;
+    margin-bottom: 1rem;
+}
+
+.poke_img {
+    width: 150px;
+    max-height: 150px;
+    align-self: center;
+}
+.pokemon_stats {
+    margin-top: 1rem;
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    flex-wrap: wrap;
+    max-height: 80px;
+    row-gap: 20px;
+    color: #000;
+}
+
+.pokemon_types {
+    margin-top: 1rem;
+    padding: 5px 10px;
+    display: flex;
+    justify-content: center;
+    color: #fff;
+    border: 1px solid #000;
+    border-radius: 20px;
+}
+.pokemon_types > p {
+    margin: 0;
+    font-weight: 500;
+}
+
+.type_not_found {
+    background-color: #000;
+}
+
+.type_fire {
+    background-color: rgb(245, 123, 75);
+}
+.type_grass {
+    background-color: #489756;
+}
+.type_water {
+    background-color: rgb(92, 220, 252);
+}
+.type_bug {
+    background-color: rgb(196, 140, 252);
+}
+.type_poison {
+    background-color: rgb(105, 243, 105);
+}
+.type_normal {
+    background-color: rgba(117, 115, 115, 1);
+}
+.type_electric {
+    background-color: rgba(255, 248, 0, 1);
+}
+.type_ground {
+    background-color: rgb(146, 122, 54);
+}
+.type_fairy {
+    background-color: rgb(245, 128, 245);
+}
+
+.not_found {
+    width: 200px;
+    background: rgb(255, 255, 255);
+    background: linear-gradient(
+        360deg,
+        #edf3ff 0%,
+        #edf3ff 49.55%,
+        #000000 49.55%,
+        #000 50%,
+        rgb(0, 0, 0) 50%,
+        rgb(0, 0, 0) 100%
+    );
+    color: #fff;
+    font-family: "Fredoka", sans-serif;
+}
+
+.fire {
+    background: rgb(255, 255, 255);
+    background: linear-gradient(
+        360deg,
+        #edf3ff 0%,
+        #edf3ff 49.55%,
+        #000000 49.55%,
+        #000 50%,
+        rgb(245, 123, 75) 50%,
+        rgb(245, 123, 75) 100%
+    );
+    color: #fff;
+}
+.grass {
+    background: rgb(255, 255, 255);
+    background: linear-gradient(
+        360deg,
+        #edf3ff 0%,
+        #edf3ff 49.55%,
+        #000000 49.55%,
+        #000 50%,
+        rgb(72, 151, 86) 50%,
+        rgb(72, 151, 86) 100%
+    );
+    color: #fff;
+}
+
+.water {
+    background: rgb(255, 255, 255);
+    background: linear-gradient(
+        360deg,
+        #edf3ff 0%,
+        #edf3ff 49.55%,
+        #000000 49.55%,
+        #000 50%,
+        rgb(92, 220, 252) 50%,
+        rgb(92, 220, 252) 100%
+    );
+    color: #fff;
+}
+.bug {
+    background: rgb(255, 255, 255);
+    background: linear-gradient(
+        360deg,
+        #edf3ff 0%,
+        #edf3ff 49.55%,
+        #000000 49.55%,
+        #000 50%,
+        rgb(196, 140, 252) 50%,
+        rgb(196, 140, 252) 100%
+    );
+    color: #fff;
+}
+.poison {
+    background: rgb(255, 255, 255);
+    background: linear-gradient(
+        360deg,
+        #edf3ff 0%,
+        #edf3ff 49.55%,
+        #000000 49.55%,
+        #000 50%,
+        rgb(105, 243, 105) 50%,
+        rgb(105, 243, 105) 100%
+    );
+    color: #fff;
+}
+.normal {
+    background: rgb(255, 255, 255);
+    background: linear-gradient(
+        360deg,
+        #edf3ff 0%,
+        #edf3ff 49.55%,
+        #000000 49.55%,
+        #000 50%,
+        rgba(117, 115, 115, 1) 50%,
+        rgba(117, 115, 115, 1) 100%
+    );
+    color: #fff;
+}
+.electric {
+    background: rgb(255, 255, 255);
+    background: linear-gradient(
+        360deg,
+        #edf3ff 0%,
+        #edf3ff 49.55%,
+        #000000 49.55%,
+        #000 50%,
+        rgba(255, 248, 0, 1) 50%,
+        rgba(255, 248, 0, 1) 100%
+    );
+    color: #fff;
+}
+.ground {
+    background: rgb(255, 255, 255);
+    background: linear-gradient(
+        360deg,
+        #edf3ff 0%,
+        #edf3ff 49.55%,
+        #000000 49.55%,
+        #000 50%,
+        rgb(146, 122, 54) 50%,
+        rgb(146, 122, 54) 100%
+    );
+    color: #fff;
+}
+.fairy {
+    background: rgb(255, 255, 255);
+    background: linear-gradient(
+        360deg,
+        #edf3ff 0%,
+        #edf3ff 49.55%,
+        #000000 49.55%,
+        #000 50%,
+        rgb(245, 128, 245) 50%,
+        rgb(245, 128, 245) 100%
+    );
+    color: #fff;
+}

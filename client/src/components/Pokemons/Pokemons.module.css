@@ -1,0 +1,35 @@
+body {
+    background: #fff;
+}
+
+.pokemons_card {
+    margin: 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin-top: 7rem;
+}
+
+.loading_pokeball {
+    width: 150px;
+    height: 150px;
+    margin: 15rem auto 0 auto;
+}
+.broken_pokeball {
+    width: 300px;
+    margin: 10rem 0 0 30rem;
+}
+
+.background {
+    filter: brightness(0.7);
+    position: fixed;
+    z-index: -1;
+    width: 300px;
+    top: 50%;
+    left: 50%;
+    width: 885px;
+    height: 500px;
+    margin-top: -250px; /* Half the height */
+    margin-left: -442.5px; /* Half the width */
+}

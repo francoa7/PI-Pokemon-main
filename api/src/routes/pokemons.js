@@ -3,33 +3,20 @@ const router = express.Router();
 const axios = require("axios");
 const { Pokemon, Type } = require("../db");
 const path = require("path");
-
-async function getUrl(url) {
-    try {
-        const data = await axios.get(url);
-        return { data, error: false };
-    } catch (error) {
-        return { data: false, error };
-    }
-}
-
-function promisifiedGetPokemons(data) {
-    return data.data.results.map((poke) => {
-        return new Promise(function (resolve, reject) {
-            axios
-                .get(poke.url)
-                .then((response) => resolve(response))
-                .catch(function (error) {
-                    reject(error);
-                });
-        });
-    });
-}
+const { getUrl, promisifyGetData, createPokemon } = require("./utils");
 
 router.get("/", async (req, res) => {
+    getUrl("http://localhost:3001/types");
     const { name } = req.query;
     if (name) {
-        const pokemon = await Pokemon.findOne({ where: { name: name } });
+        const pokemon = await Pokemon.findOne({
+            where: {
+                name: name,
+            },
+            include: {
+                model: Type,
+            },
+        });
         if (pokemon) {
             return res.json(pokemon);
         } else {
@@ -43,19 +30,34 @@ router.get("/", async (req, res) => {
                         "failed to get the pokemon with the specified name",
                 });
             } else {
-                res.json(data.data);
+                const pokemon = {
+                    id: data.data.id,
+                    name: data.data.name,
+                    image: data.data.sprites.other.dream_world.front_default,
+                    types: data.data.types.map((type) => type.type),
+                    hp: data.data.stats[0].base_stat,
+                    attack: data.data.stats[1].base_stat,
+                    defense: data.data.stats[2].base_stat,
+                    speed: data.data.stats[5].base_stat,
+                    height: data.data.height,
+                    weight: data.data.weight,
+                };
+                return res.json(pokemon);
             }
         }
     } else {
-        var { data, error } = await getUrl("https://pokeapi.co/api/v2/pokemon");
-        if (!data) {
+        var firstData = await getUrl("https://pokeapi.co/api/v2/pokemon");
+        if (!firstData.data) {
             return res.status(404).send({
-                error: error.message,
-                description: "failed in general get",
+                error: firstData.error.message,
+                description: "Failed to get all the pokemons from the API",
             });
         } else {
-            const pokePromises = promisifiedGetPokemons(data);
-            console.log(pokePromises);
+            var secondData = await getUrl(firstData.data.data.next);
+
+            const pokePromises = promisifyGetData(firstData.data).concat(
+                promisifyGetData(secondData.data)
+            );
             var pokemons = [];
             await Promise.all(pokePromises)
                 .then(
@@ -66,7 +68,13 @@ router.get("/", async (req, res) => {
                                 name: poke.data.name,
                                 image: poke.data.sprites.other.dream_world
                                     .front_default,
-                                types: poke.data.types,
+                                types: poke.data.types.map((type) => type.type),
+                                hp: poke.data.stats[0].base_stat,
+                                attack: poke.data.stats[1].base_stat,
+                                defense: poke.data.stats[2].base_stat,
+                                speed: poke.data.stats[5].base_stat,
+                                height: poke.data.height,
+                                weight: poke.data.weight,
                             };
                         }))
                 )
@@ -78,7 +86,6 @@ router.get("/", async (req, res) => {
             if (fromdb.length) {
                 fromdb.forEach((poke) => {
                     pokemons.push(poke.dataValues);
-                    console.log(poke.dataValues);
                 });
             }
 
@@ -95,8 +102,7 @@ router.get("/", async (req, res) => {
 router.get("/:id", async (req, res) => {
     const { id } = req.params;
     const isInteger = /^[0-9]+$/.test(id);
-    console.log("Is Integer?");
-    console.log(isInteger);
+
     if (isInteger) {
         const { data, error } = await getUrl(
             `https://pokeapi.co/api/v2/pokemon/${id}`
@@ -108,7 +114,21 @@ router.get("/:id", async (req, res) => {
                 description: "failed to get the specified pokemon",
             });
         } else {
-            res.send(data.data);
+            const pokemon = {
+                id: data.data.id,
+                name: data.data.name,
+                image: data.data.sprites.other.dream_world.front_default,
+                hp: data.data.stats[0].base_stat,
+                attack: data.data.stats[1].base_stat,
+                defense: data.data.stats[2].base_stat,
+                speed: data.data.stats[5].base_stat,
+                height: data.data.height,
+                weight: data.data.weight,
+                types: data.data.types.map((type) => {
+                    return { name: type.type.name };
+                }),
+            };
+            res.send(pokemon);
         }
     } else {
         try {
@@ -120,25 +140,37 @@ router.get("/:id", async (req, res) => {
     }
 });
 
-router.get("/create/:id", async (req, res) => {
-    const { id } = req.params;
-    const pokemon = await Pokemon.create({ name: "Franco" });
-    res.send(pokemon);
+function areCorrectParams(params) {
+    const { name, types, hp, attack, defense, speed, height, weight } = params;
+    if (
+        !name ||
+        typeof name !== "string" ||
+        !types ||
+        types.length === 0 ||
+        !Array.isArray(types) ||
+        typeof hp !== "number" ||
+        typeof attack !== "number" ||
+        typeof defense !== "number" ||
+        typeof speed !== "number" ||
+        typeof height !== "number" ||
+        typeof weight !== "number"
+    ) {
+        return false;
+    }
+    return true;
+}
+
+router.post("/", async (req, res) => {
+    if (areCorrectParams(req.body)) {
+        const pokemon = await createPokemon(req.body);
+
+        return res.send(pokemon);
+    } else {
+        return res.status(400).send("Missing or wrong params");
+    }
 });
 
-router.post("/pokemons", (req, res) => {
-    const { name, types, hp, attack, defense, speed } = req.body;
-    // [ ] POST /pokemons:
-    // Recibe los datos recolectados desde el formulario controlado de la ruta de creación de pokemons por body
-    // Crea un pokemon en la base de datos
-    //
-    // [ ] Los campos mostrados en la ruta principal para cada pokemon (imagen, nombre y tipos)
-    // [ ] Número de Pokemon (id)
-    // [ ] Estadísticas (vida, fuerza, defensa, velocidad)
-    // [ ] Altura y peso
-});
-
-router.get("/image/default", (req, res) => {
+router.get("/image/default-pokemon", (req, res) => {
     var filepath = path.join(__dirname, "../img/default_pokemon.png");
     res.sendFile(filepath);
 });

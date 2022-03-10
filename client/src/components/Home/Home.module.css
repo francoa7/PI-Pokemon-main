@@ -1,0 +1,54 @@
+@import url("//db.onlinewebfonts.com/c/f4d1593471d222ddebd973210265762a?family=Pokemon");
+body {
+    user-select: none;
+}
+
+.home {
+    background: linear-gradient(to right, #386a69, #77baa2);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+    user-select: none;
+    height: 100vh;
+}
+.welcome {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    color: #ffc700;
+    font-family: "Pokemon", sans-serif;
+    letter-spacing: 5px;
+    text-shadow: 2px 2px 5px #195aab;
+}
+h1 {
+    padding: 0;
+    margin-top: -10px;
+}
+.logo {
+    height: 150px;
+}
+.img {
+    height: 500px;
+}
+
+.start_button {
+    border: 1px solid #5c2428;
+    background-color: #cc5369;
+    color: #fff;
+    border-radius: 10px;
+    font-family: "Architects Daughter", cursive;
+    font-weight: 600;
+    letter-spacing: 3px;
+    font-size: 1.5rem;
+    padding: 5px 10px;
+    transition: background-color 0.25s, color 0.25s, border 0.25s;
+}
+
+.start_button:hover {
+    cursor: pointer;
+    border: 1px solid #c13951;
+    background-color: #972d41;
+    color: #fff;
+}
