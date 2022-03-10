@@ -19,7 +19,7 @@ function Pokemons() {
       const [pokemonsPerPage, setpokemonsPerPage] = useState(12)
       const indexOfLastPokemon = currentPage * pokemonsPerPage;
       const indexOfFirstPokemon = indexOfLastPokemon - pokemonsPerPage;
-      const currentPokes = pokemons.slice(indexOfFirstPokemon, indexOfLastPokemon);
+      const currentPokes = Array.isArray(pokemons) && pokemons.slice(indexOfFirstPokemon, indexOfLastPokemon);
 
       const paginate = function (pageNumber) {
             setCurrentPage(pageNumber)
@@ -56,29 +56,33 @@ function Pokemons() {
             <div >
                   <Nav handleFilterOrigin={handleFilterOrigin} resetPaginate={resetPaginate} />
 
-                  {pokemons.length
-                        ?
-                        pokemons[0].error
+                  {Array.isArray(pokemons) ?
+                        pokemons.length
                               ?
-                              <div className={styles.pokemons_card}>
-                                    <Pokemon pokemon={{}} />
-                              </div>
-
-                              // <img src={sadPikachu} alt='pokeball' className={styles.broken_pokeball}></img>
-                              :
-                              (
+                              pokemons[0].error
+                                    ?
                                     <div className={styles.pokemons_card}>
-                                          {currentPokes.map(pokemon => {
-                                                return (
-                                                      <Link key={pokemon.id} to={`/pokemon/${pokemon.id}`}>
-                                                            <Pokemon pokemon={pokemon} />
-                                                      </Link>)
-                                          })}
+                                          <Pokemon pokemon={{}} />
                                     </div>
-                              )
 
-                        :
-                        <img src={pokeball} alt='pokeball' className={styles.loading_pokeball}></img>}
+                                    // <img src={sadPikachu} alt='pokeball' className={styles.broken_pokeball}></img>
+                                    :
+                                    (
+                                          <div className={styles.pokemons_card}>
+                                                {currentPokes.map(pokemon => {
+                                                      return (
+                                                            <Link key={pokemon.id} to={`/pokemon/${pokemon.id}`}>
+                                                                  <Pokemon pokemon={pokemon} />
+                                                            </Link>)
+                                                })}
+                                          </div>
+                                    )
+
+                              :
+                              <img src={pokeball} alt='pokeball' className={styles.loading_pokeball}></img>
+                        : <div className={styles.pokemons_card}>
+                              <Pokemon pokemon={{}} />
+                        </div>}
 
                   <Paginate
                         pokemonsPerPage={pokemonsPerPage}

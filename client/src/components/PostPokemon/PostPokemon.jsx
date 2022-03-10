@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { postPokemon, getPokemons } from '../../actions';
+import { postPokemon, getPokemons, getTypes } from '../../actions';
 import styles from './PostPokemon.module.css'
 import { capitalizeString } from '../../utils'
 import { Link, useNavigate } from 'react-router-dom'
@@ -13,6 +13,8 @@ function PostPokemon() {
       const existingPokemons = useSelector(state => state.dataPokemons)
       const lastPostedPokemon = useSelector(state => state.lastPostedPokemon)
       const navigate = useNavigate();
+
+      useEffect(() => { !dataTypes.length && dispatch(getTypes()) }, [])
 
       const [errors, setErrors] = useState({
             default: 'Complete all fields'

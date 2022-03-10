@@ -73,7 +73,6 @@ function Nav({ handleFilterOrigin, resetPaginate }) {
                         </div>
                         <div className={styles.filter_group}>
                               <select onChange={(event) => handleFilterTypes(event)} className={styles.select}>
-                                    <option >Types</option>
                                     <option value="all">All types</option>
                                     {types?.map(type => <option key={type.name} value={type.name}>{capitalizeString(type.name)}</option>)}
                               </select>

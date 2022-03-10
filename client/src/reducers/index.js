@@ -70,7 +70,6 @@ function orderStrength(state = initialState, order) {
 
 function filterType(state = initialState, type) {
     let filteredPokemons = [];
-    //     if (state.lastFilter === "o") {
     type !== "all"
         ? state.dataPokemons.forEach((pokemon) => {
               for (let i = 0; i < pokemon.types.length; i++) {
@@ -80,18 +79,9 @@ function filterType(state = initialState, type) {
               }
           })
         : (filteredPokemons = state.dataPokemons);
-    //     } else {
-    //         type !== "all"
-    //             ? state.pokemons.forEach((pokemon) => {
-    //                   for (let i = 0; i < pokemon.types.length; i++) {
-    //                       if (pokemon.types[i].name === type) {
-    //                           filteredPokemons.push(pokemon);
-    //                       }
-    //                   }
-    //               })
-    //             : (filteredPokemons = state.pokemons);
-    //     }
-    return filteredPokemons;
+
+    if (!filteredPokemons.length) return {};
+    else return filteredPokemons;
 }
 
 function filterOrigin(state = initialState, origin) {
@@ -106,7 +96,8 @@ function filterOrigin(state = initialState, origin) {
           })
         : (filteredPokemons = state.dataPokemons);
 
-    return filteredPokemons;
+    if (!filteredPokemons.length) return {};
+    else return filteredPokemons;
 }
 
 export default function reducer(state = initialState, { type, payload }) {
