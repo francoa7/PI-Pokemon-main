@@ -12,6 +12,9 @@
     font-family: "Fredoka", sans-serif;
     box-shadow: 1px 0px 5px #000;
 }
+.logo {
+    width: 130px;
+}
 .filters {
     display: flex;
     flex-direction: row;
@@ -19,7 +22,7 @@
 }
 
 .select {
-    border: 1px solid #f10404;
+    border: 2px solid #f10404;
     outline: none;
     letter-spacing: 1.5px;
     border-radius: 10px;
@@ -28,6 +31,9 @@
     font-family: "Fredoka", sans-serif;
     width: 100px;
     height: 25px;
+}
+.select:hover {
+    cursor: pointer;
 }
 option {
     font-family: "Fredoka", sans-serif;
@@ -42,7 +48,7 @@ option {
     font-family: "Fredoka", sans-serif;
     font-weight: bolder;
     font-size: 1rem;
-    border: 1px solid #000;
+    border: 2px solid #000;
     border-radius: 100px;
     color: #f10404;
 }
@@ -51,6 +57,9 @@ option {
     width: 20px;
 }
 
+.create_button > label:hover {
+    cursor: pointer;
+}
 .create_button:hover {
     cursor: pointer;
 }

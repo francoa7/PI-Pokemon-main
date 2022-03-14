@@ -15,57 +15,125 @@ input {
     font-weight: bolder;
 }
 .image_container {
-    box-shadow: 0px 0px 10px #000;
     flex-grow: 1;
-    justify-content: center;
+    justify-content: space-evenly;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    background-color: #ddd9d9;
     min-width: 300px;
     height: 100vh;
-    flex-direction: column;
 }
 .go_back {
+    font-weight: bold;
     position: fixed;
     top: 20px;
     left: 20px;
     text-decoration: none;
-    background-color: #17a0c2;
+    background-color: #ff0000;
     padding: 14px 20px;
     border-radius: 10px;
-    border: none;
+    border: 1px solid #000;
     color: #fff;
+    text-transform: uppercase;
+    text-shadow: -1px 1px 0 #000, 1px 1px 0 #000, 1px -1px 0 #000,
+        -1px -1px 0 #000;
 }
-
+.poke_name {
+    color: #1d2c5e;
+    font-size: 2.5rem;
+}
 .default_pokemon {
     z-index: 2;
     width: 300px;
 }
+
+.circle {
+    bottom: 0;
+    left: 80px;
+    position: absolute;
+    width: 300px;
+    height: 150px;
+    background: #ff0000;
+    border-radius: 300px 300px 0 0;
+    border: 1px solid #000;
+}
+
+div.danger {
+    background-color: #ff0000;
+    color: #fff;
+    padding: 1.2rem 1.5rem;
+    display: flex;
+    border-radius: 2.5rem 2.5rem 0 0;
+    padding-left: 3rem;
+    border: 1px solid #000;
+    border-bottom: none;
+    text-transform: uppercase;
+    font-size: 1.5rem;
+    text-shadow: -1px 1px 0 #000, 1px 1px 0 #000, 1px -1px 0 #000,
+        -1px -1px 0 #000;
+}
+
+div.succes {
+    background-color: #ff0000;
+    color: #fff;
+    padding: 1.2rem 1.5rem;
+    display: flex;
+    border-radius: 2.5rem 2.5rem 0 0;
+    padding-left: 3rem;
+    border: 1px solid #000;
+    border-bottom: none;
+    text-transform: uppercase;
+    font-size: 1.5rem;
+    text-shadow: -1px 1px 0 #000, 1px 1px 0 #000, 1px -1px 0 #000,
+        -1px -1px 0 #000;
+}
+input.danger {
+    border: 2px solid #ff0000;
+}
+.inputs_container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 4rem 5rem 7rem 5rem;
+}
 .form_container {
-    padding: 3rem;
-    padding-left: 5rem;
+    border-radius: 0 0 3rem 3rem;
+    border: 1px solid #000;
+    border-top: none;
+    padding: 2rem 1rem;
     flex-grow: 1;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    justify-content: flex-start;
+    justify-content: space-evenly;
+}
+
+.form {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
 }
 
 .title {
+    align-items: center;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: flex-start;
 }
 .label {
-    display: block;
+    padding-left: 10px;
+    flex-grow: 0.1;
     text-align: start;
 }
 
 .input_text {
+    flex-grow: 0.9;
     outline: none;
     border: none;
-    border-bottom: 1px solid #17a0c2;
+    border: 1px solid #000;
+    border-radius: 2rem;
     padding: 0.5rem;
-    margin-bottom: 3rem;
     transition: 0.3s;
 }
 
@@ -75,40 +143,47 @@ input {
 
 .input_number {
     outline: none;
-    border: none;
-    border-bottom: 1px solid #17a0c2;
+    border: 1px solid #000;
+    border-radius: 2rem;
     padding: 0.5rem;
-    margin-bottom: 1rem;
-    margin-top: 0.5rem;
     transition: 0.3s;
-    width: 2rem;
+    width: 3rem;
     text-align: center;
 }
 
 .stats_group {
+    margin-top: 1.5rem;
     width: 50vw;
     display: flex;
     flex-direction: column;
+    row-gap: 2rem;
     flex-wrap: wrap;
-    max-height: 200px;
+    max-height: 110px;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: center;
 }
 .stat {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    column-gap: 1rem;
+    align-items: center;
+}
+.types_section {
     margin-top: 1rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
     align-items: center;
 }
 
 .types_list {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    margin: 1rem 8rem;
-    justify-content: center;
     border: 1px solid #000;
-    width: 200px;
+    font-weight: bolder;
+    font-size: 1rem;
+    border-radius: 2rem;
+    padding: 0.5rem;
+    text-align: center;
+    height: fit-content;
 }
 
 .stats {
@@ -116,28 +191,59 @@ input {
     flex-direction: column;
     margin: 0 30rem;
 }
-.types_section {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
 
 .selected_types {
+    margin: 0;
     display: flex;
     flex-direction: row;
+    list-style: none;
 }
 
 .selected_types > li {
+    display: flex;
     margin: 0 1rem;
+    border: 1px solid #000;
+    padding: 0.5rem 1rem;
+    border-radius: 2rem;
+    text-transform: uppercase;
+    column-gap: 0.5rem;
+    color: #1d2c5e;
 }
-
-p.danger {
+.selected_types > li > button {
+    font-family: "Fredoka", sans-serif;
+    background-color: #fff;
     color: #ff0000;
+    font-weight: bolder;
+    border: none;
+    border-radius: 50%;
+    transition: all 0.2s;
+}
+.selected_types > li > button:hover {
+    cursor: pointer;
+    font-family: "Fredoka", sans-serif;
+    background-color: #ff0000;
+    color: #fff;
+    font-weight: bolder;
+    border: none;
+    border-radius: 50%;
 }
 
-p.succes {
-    color: #008000;
+.input_submit {
+    padding: 0.5rem 1rem;
+    border-radius: 2rem;
+    color: #fff;
+    border: 1px solid #000;
+    background-color: #1d2c5e;
+    transition: all 0.3s;
 }
-input.danger {
-    border-bottom: 1px solid #ff0000;
+.input_submit:hover {
+    cursor: pointer;
+}
+
+.input_submit:disabled {
+    padding: 0.5rem 1rem;
+    border-radius: 2rem;
+    color: #fff;
+    background-color: #8b8a8a;
+    border: 1px solid rgb(73, 73, 73);
 }

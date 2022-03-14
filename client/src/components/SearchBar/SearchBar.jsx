@@ -11,6 +11,7 @@ function SearchBar({ resetPaginate }) {
             event.preventDefault();
             dispatch(getPokemons(document.getElementById('input_pokemon_name').value.toLowerCase()))
             resetPaginate()
+            document.getElementById('input_pokemon_name').value = "";
       }
       return (
             <div >

@@ -34,7 +34,7 @@ function Nav({ handleFilterOrigin, resetPaginate }) {
             dispatch(getTypes())
       }
       useEffect(() => {
-            findTypes();
+            !types.length && findTypes();
       }, [])
 
 
@@ -44,7 +44,7 @@ function Nav({ handleFilterOrigin, resetPaginate }) {
 
                   <div className={styles.logo_section}>
                         <Link to='/'>
-                              <img width="130px" src={logo} alt="logo" />
+                              <img className={styles.logo} src={logo} alt="logo" />
                         </Link>
                   </div>
                   <div className={styles.filters}>

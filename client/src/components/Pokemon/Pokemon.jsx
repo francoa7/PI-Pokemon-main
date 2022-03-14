@@ -15,6 +15,7 @@ function Pokemon({ pokemon }) {
             else if (pokemon.types.find(type => type.name === 'electric')) return styles.electric
             else if (pokemon.types.find(type => type.name === 'ground')) return styles.ground
             else if (pokemon.types.find(type => type.name === 'fairy')) return styles.fairy
+            else if (pokemon.types.find(type => type.name === 'fighting')) return styles.fighting
             return ""
       }
 
@@ -28,6 +29,7 @@ function Pokemon({ pokemon }) {
             else if (pokemon.types.find(type => type.name === 'electric')) return styles.type_electric
             else if (pokemon.types.find(type => type.name === 'ground')) return styles.type_ground
             else if (pokemon.types.find(type => type.name === 'fairy')) return styles.type_fairy
+            else if (pokemon.types.find(type => type.name === 'fighting')) return styles.type_fighting
             return ""
       }
 

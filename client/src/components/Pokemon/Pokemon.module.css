@@ -99,6 +99,9 @@ a {
     background-color: rgb(245, 128, 245);
 }
 
+.type_fighting {
+    background-color: #ff0000;
+}
 .not_found {
     width: 200px;
     background: rgb(255, 255, 255);
@@ -230,6 +233,20 @@ a {
         #000 50%,
         rgb(245, 128, 245) 50%,
         rgb(245, 128, 245) 100%
+    );
+    color: #fff;
+}
+
+.fighting {
+    background: rgb(255, 255, 255);
+    background: linear-gradient(
+        360deg,
+        #edf3ff 0%,
+        #edf3ff 49.55%,
+        #000000 49.55%,
+        #000 50%,
+        #ff0000 50%,
+        #ff0000 100%
     );
     color: #fff;
 }

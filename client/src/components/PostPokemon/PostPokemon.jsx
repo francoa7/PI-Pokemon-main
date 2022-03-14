@@ -14,7 +14,10 @@ function PostPokemon() {
       const lastPostedPokemon = useSelector(state => state.lastPostedPokemon)
       const navigate = useNavigate();
 
-      useEffect(() => { !dataTypes.length && dispatch(getTypes()) }, [])
+      useEffect(() => {
+            !dataTypes.length && dispatch(getTypes())
+            !existingPokemons.length && dispatch(getPokemons())
+      }, [])
 
       const [errors, setErrors] = useState({
             default: 'Complete all fields'
@@ -60,6 +63,7 @@ function PostPokemon() {
             e.preventDefault()
             const existingType = input.types.find(type => type === e.target.value)
             if (existingType) return
+            if (input.types.length > 1) return
             setInput({
                   ...input,
                   types: [...input.types, e.target.value]
@@ -97,124 +101,145 @@ function PostPokemon() {
                         Back
                   </Link>
                   <div className={styles.image_container}>
+                        <h2 className={styles.poke_name}>{input.name.toUpperCase() || "NAME..."}</h2>
                         <img className={styles.default_pokemon} src="http://localhost:3001/pokemons/image/default-pokemon" alt="default pokemon" />
+                        <div className={styles.circle}></div>
                   </div>
 
-                  <div className={styles.form_container}>
+                  <div className={styles.inputs_container}>
 
                         {Object.entries(errors).length !== 0 ?
-                              (<p className={styles.danger}>{errors[Object.keys(errors)[0]]}</p>) :
-                              <p className={styles.succes}>Well done!</p>}
+                              (<div className={styles.danger}>{errors[Object.keys(errors)[0]]}</div>) :
+                              <div className={styles.succes}>Well done!</div>}
 
-                        <form onSubmit={(e) => handleSubmit(e)}>
-                              <div className={styles.title}>
-                                    <label className={styles.label} htmlFor="name">Pokemon name</label>
-                                    <input id='name' type="text" name="name" value={input.name} className={`${styles.input_text} ${errors.name && styles.danger}`}
-                                          onChange={(e) => handleInputChange(e)}
-                                          autoComplete='off'
-                                          required />
+                        <div className={styles.form_container}>
 
-                              </div>
-
-                              <div className={styles.stats_group}>
-                                    <div className={styles.stat}>
-                                          <label className={styles.label}>HP</label>
-                                          <input
-                                                type="number"
-                                                name="hp"
-                                                max={255}
-                                                min={1}
-                                                onChange={(e) => handleNumberInputChange(e)}
-                                                className={`${styles.input_number} ${errors.hp && styles.danger}`} />
-                                    </div>
-                                    <div className={styles.stat}>
-                                          <label className={styles.label}>Attack</label>
-                                          <input
-                                                type="number"
-                                                name="attack"
-                                                max={255}
-                                                min={1}
-                                                onChange={(e) => handleNumberInputChange(e)}
-                                                className={`${styles.input_number} ${errors.attack && styles.danger}`} />
+                              <form className={styles.form} onSubmit={(e) => handleSubmit(e)}>
+                                    <div className={styles.title}>
+                                          <label className={styles.label} htmlFor="name">NAME</label>
+                                          <input id='name' type="text" placeholder="NAME..." name="name" value={input.name} className={`${styles.input_text} ${errors.name && styles.danger}`}
+                                                onChange={(e) => handleInputChange(e)}
+                                                autoComplete='off'
+                                                required />
 
                                     </div>
 
-                                    <div className={styles.stat}>
-                                          <label className={styles.label}>Defense</label>
-                                          <input
-                                                type="number"
-                                                name="defense"
-                                                max={255}
-                                                min={1}
-                                                onChange={(e) => handleNumberInputChange(e)}
-                                                className={`${styles.input_number} ${errors.defense && styles.danger}`} />
+                                    <div className={styles.stats_group}>
+                                          <div className={styles.stat}>
+                                                <label className={styles.label}>HP</label>
+                                                <input
+                                                      placeholder='...'
+                                                      type="number"
+                                                      name="hp"
+                                                      max={255}
+                                                      min={1}
+                                                      onChange={(e) => handleNumberInputChange(e)}
+                                                      className={`${styles.input_number} ${errors.hp && styles.danger}`} />
+                                          </div>
+                                          <div className={styles.stat}>
+                                                <label className={styles.label}>ATTACK</label>
+                                                <input
+                                                      placeholder='...'
+                                                      type="number"
+                                                      name="attack"
+                                                      max={255}
+                                                      min={1}
+                                                      onChange={(e) => handleNumberInputChange(e)}
+                                                      className={`${styles.input_number} ${errors.attack && styles.danger}`} />
 
+                                          </div>
+
+                                          <div className={styles.stat}>
+                                                <label className={styles.label}>DEFENSE</label>
+                                                <input
+                                                      placeholder='...'
+                                                      type="number"
+                                                      name="defense"
+                                                      max={255}
+                                                      min={1}
+                                                      onChange={(e) => handleNumberInputChange(e)}
+                                                      className={`${styles.input_number} ${errors.defense && styles.danger}`} />
+
+
+                                          </div>
+
+                                          <div className={styles.stat}>
+                                                <label className={styles.label}>SPEED</label>
+                                                <input
+                                                      placeholder='...'
+                                                      type="number"
+                                                      name="speed"
+                                                      max={255}
+                                                      min={1}
+                                                      onChange={(e) => handleNumberInputChange(e)}
+                                                      className={`${styles.input_number} ${errors.speed && styles.danger}`} />
+
+                                          </div>
+
+                                          <div className={styles.stat}>
+                                                <label className={styles.label}>HEIGHT</label>
+                                                <input
+                                                      placeholder='...'
+                                                      type="number"
+                                                      name="height"
+                                                      max={255}
+                                                      min={1}
+                                                      onChange={(e) => handleNumberInputChange(e)}
+                                                      className={`${styles.input_number} ${errors.height && styles.danger}`} />
+
+
+                                          </div>
+
+                                          <div className={styles.stat}>
+                                                <label className={styles.label}>WEIGHT</label>
+                                                <input
+                                                      placeholder='...'
+                                                      type="number"
+                                                      name="weight"
+                                                      max={255}
+                                                      min={1}
+                                                      onChange={(e) => handleNumberInputChange(e)}
+                                                      className={`${styles.input_number} ${errors.weight && styles.danger}`} />
+
+
+                                          </div>
 
                                     </div>
 
-                                    <div className={styles.stat}>
-                                          <label className={styles.label}>Speed</label>
+                                    <div className={styles.types_section}>
+
+                                          <select disabled={input.types.length > 1} className={styles.types_list} onChange={(e) => handleTypeSelect(e)}>
+                                                <option >TYPES</option>
+
+                                                {dataTypes && dataTypes.map((type) =>
+                                                      <option key={type.name} value={type.name}>
+                                                            {type.name.toUpperCase()}
+                                                      </option>
+                                                )}
+                                          </select>
+                                          <ul className={styles.selected_types}>
+                                                {input.types?.map(type =>
+                                                      <li >
+                                                            <button onClick={(e) => handleDeleteType(e, type)}>X</button>
+                                                            {type}
+                                                      </li>
+                                                )}
+                                          </ul>
+
                                           <input
-                                                type="number"
-                                                name="speed"
-                                                max={255}
-                                                min={1}
-                                                onChange={(e) => handleNumberInputChange(e)}
-                                                className={`${styles.input_number} ${errors.speed && styles.danger}`} />
+                                                value="CREATE"
+                                                type="submit"
+                                                name=""
+                                                id=""
+                                                className={styles.input_submit} disabled={Object.keys(errors).length}
+                                          />
 
                                     </div>
 
-                                    <div className={styles.stat}>
-                                          <label className={styles.label}>Height</label>
-                                          <input
-                                                type="number"
-                                                name="height"
-                                                max={255}
-                                                min={1}
-                                                onChange={(e) => handleNumberInputChange(e)}
-                                                className={`${styles.input_number} ${errors.height && styles.danger}`} />
-
-
-                                    </div>
-
-                                    <div className={styles.stat}>
-                                          <label className={styles.label}>Weight</label>
-                                          <input
-                                                type="number"
-                                                name="weight"
-                                                max={255}
-                                                min={1}
-                                                onChange={(e) => handleNumberInputChange(e)}
-                                                className={`${styles.input_number} ${errors.weight && styles.danger}`} />
-
-
-                                    </div>
-
-                              </div>
-
-                              <div className={styles.types_section}>
-                                    <label>Types</label>
-                                    <select className={styles.types_list} onChange={(e) => handleTypeSelect(e)}>
-                                          {dataTypes && dataTypes.map((type) =>
-                                                <option key={type.name} value={type.name}>
-                                                      {capitalizeString(type.name)}
-                                                </option>
-                                          )}
-                                    </select>
-                                    <ul className={styles.selected_types}>
-                                          {input.types?.map(type =>
-                                                <li>
-                                                      <button onClick={(e) => handleDeleteType(e, type)}>-</button>
-                                                      {type}
-                                                </li>
-                                          )}
-                                    </ul>
-
-                              </div>
-
-                              <input type="submit" name="" id="" className={styles.inputSubmit} disabled={Object.keys(errors).length} />
-                        </form >
+                              </form >
+                        </div>
                   </div>
+
             </div >
       );
 }
@@ -256,6 +281,7 @@ export function validate(input, existingPokemons) {
       } else if (typeof input.weight !== 'number' || input.weight < 1 || input.weight > 255) {
             errors.weight = "WEIGHT must be a number between 0 - 255"
       } else if (input.types.length === 0) errors.types = "You must select the pokemon types"
+      else if (input.types.length > 2) errors.types = "Max 2 types"
 
       return errors;
 };

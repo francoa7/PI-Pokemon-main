@@ -20,7 +20,8 @@ body {
     color: #ffc700;
     font-family: "Pokemon", sans-serif;
     letter-spacing: 5px;
-    text-shadow: 2px 2px 5px #195aab;
+    text-shadow: -4px 4px 0 #195aab, 4px 4px 0 #195aab, 4px -4px 0 #195aab,
+        -4px -4px 0 #195aab;
 }
 h1 {
     padding: 0;
