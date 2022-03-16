@@ -1,4 +1,5 @@
 import {
+    DELETE_POKEMON,
     FILTER_ORIGIN,
     FILTER_TYPE,
     GET_POKEMONS,
@@ -7,6 +8,7 @@ import {
     ORDER_ALPH,
     ORDER_STRENGTH,
     POST_POKEMON,
+    RESET_DELETED_STATE,
     RESET_POSTED_POKEMON,
 } from "../actions/action-types";
 
@@ -17,6 +19,7 @@ const initialState = {
     types: [],
     lastFilter: "",
     lastPostedPokemon: {},
+    deletedPokemon: false,
 };
 
 function orderAlph(state = initialState, order) {
@@ -153,6 +156,30 @@ export default function reducer(state = initialState, { type, payload }) {
             return {
                 ...state,
                 lastPostedPokemon: payload,
+            };
+        case DELETE_POKEMON:
+            if (payload.status === 200) {
+            }
+            return {
+                ...state,
+                dataPokemons:
+                    payload.status === 200
+                        ? state.dataPokemons.filter(
+                              (pokemon) => pokemon.id !== payload.id
+                          )
+                        : state.dataPokemons,
+                pokemons:
+                    payload.status === 200
+                        ? state.dataPokemons.filter(
+                              (pokemon) => pokemon.id !== payload.id
+                          )
+                        : state.dataPokemons,
+                deletedPokemon: payload.status === 200 ? 200 : 400,
+            };
+        case RESET_DELETED_STATE:
+            return {
+                ...state,
+                deletedPokemon: payload,
             };
         default:
             return state;

@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link, useParams } from 'react-router-dom'
-import { getPokemonDetail } from '../../actions';
-import { capitalizeString } from '../../utils';
+import { Link, useNavigate, useParams } from 'react-router-dom'
+import { deletePokemon, getPokemonDetail } from '../../actions';
 import styles from './DetailPokemon.module.css'
 import pokeball from '../../img/pokeball.gif'
-
+import trashCan from '../../img/trash_can.svg'
+import editIcon from '../../img/edit_icon.svg'
 
 function DetailPokemon() {
       const dispatch = useDispatch();
@@ -13,9 +13,12 @@ function DetailPokemon() {
 
       const { id } = useParams()
 
+      const navigate = useNavigate()
       useEffect(() => {
             dispatch(getPokemonDetail(id))
       }, [])
+
+
       function setBackgroundType(styles) {
             if (pokemonDetail.types.find(type => type.name === 'fire')) return styles.firebackground;
             else if (pokemonDetail.types.find(type => type.name === 'grass')) return styles.grassbackground;
@@ -45,6 +48,20 @@ function DetailPokemon() {
       }
       // Object.entries(pokemonDetail).length !== 0 && console.log(pokemonDetail.types.find(type => type.name === 'fire') && styles.fire_go_back);
       const pokemonTypes = pokemonDetail.types?.map(type => type.name)
+
+      function handleDelete(id) {
+            if (window.confirm("Do you really want to delete this pokemon?")) {
+                  dispatch(deletePokemon(id))
+                  navigate(`/home`)
+            }
+      }
+      function handleEdit(id) {
+            if (window.confirm("Edit this pokemon?")) {
+
+            }
+      }
+      console.log(pokemonDetail);
+
       return (
 
             <div className={styles.detail_pokemon}>
@@ -111,8 +128,9 @@ function DetailPokemon() {
                                                 <div className={`${styles.extra_data} ${setBackgroundType(styles)}`}>{pokemonTypes.join(" - ").toUpperCase()}</div>
                                                 <div className={`${styles.extra_data} ${setBackgroundType(styles)}`}>Weight: {pokemonDetail.weight / 10}kg</div>
                                                 <div className={`${styles.extra_data} ${setBackgroundType(styles)}`}>Height: {pokemonDetail.height / 10}m</div>
-
                                           </div>
+                                          {pokemonDetail.createdInDb && <img onClick={() => handleDelete(pokemonDetail.id)} className={styles.trash_can} src={trashCan} alt="delete pokemon" />}
+                                          {pokemonDetail.createdInDb && <img onClick={() => handleEdit(pokemonDetail.id)} className={styles.edit_icon} src={editIcon} alt="edit pokemon" />}
                                     </div>
                               </div>
                         )

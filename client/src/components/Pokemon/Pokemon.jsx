@@ -49,8 +49,7 @@ function Pokemon({ pokemon }) {
                               </div >
                               :
 
-                              < div className={`${styles.poke_container} ${setCardType(styles)}`
-                              }>
+                              < div className={`${styles.poke_container} ${setCardType(styles)}`}>
                                     <h2 className={`${styles.pokemon_name} ${styles.with_border}`}>{pokemon.name.toUpperCase()}</h2>
                                     <img className={styles.poke_img} src={pokemon.image} alt="pokemon" />
                                     <div className={styles.pokemon_stats}>

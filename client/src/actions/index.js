@@ -1,4 +1,6 @@
 import {
+    DELETE_POKEMON,
+    EDIT_POKEMON,
     FILTER_ORIGIN,
     FILTER_TYPE,
     GET_POKEMONS,
@@ -7,6 +9,7 @@ import {
     ORDER_ALPH,
     ORDER_STRENGTH,
     POST_POKEMON,
+    RESET_DELETED_STATE,
     RESET_POSTED_POKEMON,
 } from "./action-types";
 
@@ -91,6 +94,36 @@ export function resetPostedPokemon() {
     return {
         type: RESET_POSTED_POKEMON,
         payload: {},
+    };
+}
+
+export function deletePokemon(id) {
+    console.log("ENTRE");
+    return function (dispatch) {
+        return fetch(`http://localhost:3001/pokemons/${id}`, {
+            method: "DELETE",
+        })
+            .then((response) => {
+                dispatch({
+                    type: DELETE_POKEMON,
+                    payload: { status: response.status, id: id },
+                });
+            })
+            .catch((err) => console.log(err));
+    };
+}
+
+export function resetDeletedState() {
+    return {
+        type: RESET_DELETED_STATE,
+        payload: false,
+    };
+}
+
+export function editPokemon(id) {
+    return {
+        type: EDIT_POKEMON,
+        payload: id,
     };
 }
 

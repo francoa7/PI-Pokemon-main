@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import { getPokemons, filterOrigin, getPokemonDetail, resetPostedPokemon } from "../../actions";
+import { getPokemons, filterOrigin, getPokemonDetail, resetPostedPokemon, resetDeletedState } from "../../actions";
 import styles from './Pokemons.module.css'
 import './Pokemons.module.css'
 import Pokemon from '../Pokemon/Pokemon';
@@ -13,6 +13,7 @@ import pokeball from '../../img/pokeball.gif'
 
 function Pokemons() {
       const pokemons = useSelector(state => state.pokemons)
+      const deletedPokemon = useSelector(state => state.deletedPokemon)
       const dispatch = useDispatch()
 
       const [currentPage, setCurrentPage] = useState(1)
@@ -50,6 +51,9 @@ function Pokemons() {
             dispatch(resetPostedPokemon())
       }, [])
 
+      if (deletedPokemon === 200) alert("Pokemon deleted successfully")
+      else if (deletedPokemon === 400) alert("There was an error deleting the pokemon")
+      dispatch(resetDeletedState())
       console.log(pokemons);
 
       return (

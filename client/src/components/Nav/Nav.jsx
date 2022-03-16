@@ -28,6 +28,7 @@ function Nav({ handleFilterOrigin, resetPaginate }) {
       function handleFilterTypes(event) {
             event.preventDefault()
             dispatch(filterTypes(event.target.value))
+            resetPaginate()
       }
 
       function findTypes() {

@@ -4,6 +4,9 @@ export const GET_TYPES = "get_types";
 
 export const POST_POKEMON = "post_pokemon";
 export const RESET_POSTED_POKEMON = "reset_posted_pokemon";
+export const DELETE_POKEMON = "delete_pokemon";
+export const RESET_DELETED_STATE = "reset_deleted_state";
+export const EDIT_POKEMON = "edit_pokemon";
 
 export const ORDER_ALPH = "order_alph";
 export const ORDER_STRENGTH = "order_strength";
