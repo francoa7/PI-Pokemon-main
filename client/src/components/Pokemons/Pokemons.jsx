@@ -27,7 +27,6 @@ function Pokemons() {
       }
 
       const singlePaginate = function (e) {
-            console.log(e.target.name);
             if (e.target.name === 'decrement')
                   if (currentPage === 1) return
                   else setCurrentPage(currentPage - 1)
@@ -54,7 +53,6 @@ function Pokemons() {
       if (deletedPokemon === 200) alert("Pokemon deleted successfully")
       else if (deletedPokemon === 400) alert("There was an error deleting the pokemon")
       dispatch(resetDeletedState())
-      console.log(pokemons);
 
       return (
             <div >

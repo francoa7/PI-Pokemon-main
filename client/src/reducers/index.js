@@ -1,5 +1,6 @@
 import {
     DELETE_POKEMON,
+    EDIT_POKEMON,
     FILTER_ORIGIN,
     FILTER_TYPE,
     GET_POKEMONS,
@@ -103,6 +104,11 @@ function filterOrigin(state = initialState, origin) {
     else return filteredPokemons;
 }
 
+function incorporateUpdatedPokemon(state = initialState, payload) {
+    let updatedPokemons = [];
+    //     updatedPokemons = state.dataPokemons.filter(pokemon=> pokemon.id !==)
+}
+
 export default function reducer(state = initialState, { type, payload }) {
     switch (type) {
         case GET_POKEMONS:
@@ -181,6 +187,20 @@ export default function reducer(state = initialState, { type, payload }) {
                 ...state,
                 deletedPokemon: payload,
             };
+        case EDIT_POKEMON:
+            return {
+                ...state,
+                pokemonDetail: payload,
+                dataPokemons: state.dataPokemons
+                    .filter((pokemon) => pokemon.id !== payload.id)
+                    .concat(payload)
+                    .concat([]),
+                pokemons: state.dataPokemons
+                    .filter((pokemon) => pokemon.id !== payload.id)
+                    .concat(payload)
+                    .concat([]),
+            };
+
         default:
             return state;
     }

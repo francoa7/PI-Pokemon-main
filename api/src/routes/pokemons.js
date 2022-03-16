@@ -170,6 +170,24 @@ router.post("/", async (req, res) => {
     }
 });
 
+router.put("/:id", async (req, res) => {
+    const { id } = req.params;
+    const input = req.body;
+
+    const pokemon = await Pokemon.findByPk(id, { include: Type });
+
+    await pokemon.update({
+        name: input.name,
+        attack: input.attack,
+        defense: input.defense,
+        hp: input.hp,
+        speed: input.speed,
+    });
+
+    pokemon.save();
+    return res.send(pokemon.dataValues);
+});
+
 router.delete("/:id", async (req, res) => {
     const { id } = req.params;
     try {

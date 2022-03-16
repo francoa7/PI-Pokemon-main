@@ -14,7 +14,6 @@ import {
 } from "./action-types";
 
 export function getPokemons(name) {
-    console.log(name);
     let url = "";
     if (name && name.length > 0)
         url = `http://localhost:3001/pokemons?name=${name}`;
@@ -24,7 +23,6 @@ export function getPokemons(name) {
         return fetch(url)
             .then((response) => response.json())
             .then((data) => {
-                console.log(data);
                 dispatch({
                     type: GET_POKEMONS,
                     payload: data,
@@ -81,7 +79,6 @@ export function postPokemon(pokemon) {
         })
             .then((response) => response.json())
             .then((data) => {
-                console.log(data);
                 dispatch({
                     type: POST_POKEMON,
                     payload: data,
@@ -98,7 +95,6 @@ export function resetPostedPokemon() {
 }
 
 export function deletePokemon(id) {
-    console.log("ENTRE");
     return function (dispatch) {
         return fetch(`http://localhost:3001/pokemons/${id}`, {
             method: "DELETE",
@@ -120,10 +116,22 @@ export function resetDeletedState() {
     };
 }
 
-export function editPokemon(id) {
-    return {
-        type: EDIT_POKEMON,
-        payload: id,
+export function editPokemon(id, input) {
+    return function (dispatch) {
+        return fetch(`http://localhost:3001/pokemons/${id}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(input),
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                dispatch({
+                    type: EDIT_POKEMON,
+                    payload: data,
+                });
+            });
     };
 }
 

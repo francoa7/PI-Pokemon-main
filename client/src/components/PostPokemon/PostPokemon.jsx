@@ -77,7 +77,6 @@ function PostPokemon() {
             e.preventDefault()
             await dispatch(postPokemon(input));
             await dispatch(getPokemons());
-            console.log(lastPostedPokemon);
 
       }
 
