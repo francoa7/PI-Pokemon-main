@@ -19,7 +19,7 @@ module.exports = (sequelize) => {
             type: DataTypes.STRING,
             allowNull: false,
             defaultValue:
-                "http://localhost:3001/pokemons/image/default-pokemon",
+                "https://pokemon-the-wiki.herokuapp.com/pokemons/image/default-pokemon",
             // defaultValue:
             //     "https://w7.pngwing.com/pngs/626/602/png-transparent-question-mark-interrogative-others-miscellaneous-text-logo-thumbnail.png",
         },
