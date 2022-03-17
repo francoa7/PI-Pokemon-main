@@ -101,7 +101,7 @@ function PostPokemon() {
                   </Link>
                   <div className={styles.image_container}>
                         <h2 className={styles.poke_name}>{input.name.toUpperCase() || "NAME..."}</h2>
-                        <img className={styles.default_pokemon} src="http://localhost:3001/pokemons/image/default-pokemon" alt="default pokemon" />
+                        <img className={styles.default_pokemon} src="https://pokemon-the-wiki.herokuapp.com/pokemons/image/default-pokemon" alt="default pokemon" />
                         <div className={styles.circle}></div>
                   </div>
 
