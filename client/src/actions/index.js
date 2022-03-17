@@ -12,22 +12,20 @@ import {
     RESET_DELETED_STATE,
     RESET_POSTED_POKEMON,
 } from "./action-types";
+import axios from "axios";
 
 export function getPokemons(name) {
     let url = "";
-    if (name && name.length > 0)
-        url = `http://localhost:3001/pokemons?name=${name}`;
-    else url = "http://localhost:3001/pokemons";
+    if (name && name.length > 0) url = `/pokemons?name=${name}`;
+    else url = "/pokemons";
 
     return function (dispatch) {
-        return fetch(url)
-            .then((response) => response.json())
-            .then((data) => {
-                dispatch({
-                    type: GET_POKEMONS,
-                    payload: data,
-                });
+        return axios.get(url).then((response) => {
+            dispatch({
+                type: GET_POKEMONS,
+                payload: response.data,
             });
+        });
     };
 }
 
@@ -37,53 +35,50 @@ export function getPokemonDetail(id) {
     }
 
     return function (dispatch) {
-        return fetch(`http://localhost:3001/pokemons/${id}`)
-            .then((response) => response.json())
-            .then((data) => {
-                if (data.error) {
-                    dispatch({
-                        type: GET_POKEMON_DETAIL,
-                        payload: { notfound: true },
-                    });
-                } else {
-                    dispatch({
-                        type: GET_POKEMON_DETAIL,
-                        payload: data,
-                    });
-                }
-            });
+        return axios.get(`/pokemons/${id}`).then((response) => {
+            if (response.data.error) {
+                dispatch({
+                    type: GET_POKEMON_DETAIL,
+                    payload: { notfound: true },
+                });
+            } else {
+                dispatch({
+                    type: GET_POKEMON_DETAIL,
+                    payload: response.data,
+                });
+            }
+        });
     };
 }
 
 export function getTypes() {
     return function (dispatch) {
-        return fetch(`http://localhost:3001/types`)
-            .then((response) => response.json())
-            .then((data) => {
-                dispatch({
-                    type: GET_TYPES,
-                    payload: data,
-                });
+        return axios.get(`/types`).then((response) => {
+            dispatch({
+                type: GET_TYPES,
+                payload: response.data,
             });
+        });
     };
 }
 
 export function postPokemon(pokemon) {
     return function (dispatch) {
-        return fetch("http://localhost:3001/pokemons", {
+        return axios({
             method: "POST",
+            url: "/pokemons",
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify(pokemon),
+            data: JSON.stringify(pokemon),
         })
-            .then((response) => response.json())
-            .then((data) => {
+            .then((response) => {
                 dispatch({
                     type: POST_POKEMON,
-                    payload: data,
+                    payload: response.data,
                 });
-            });
+            })
+            .catch((err) => console.log(err));
     };
 }
 
@@ -96,7 +91,7 @@ export function resetPostedPokemon() {
 
 export function deletePokemon(id) {
     return function (dispatch) {
-        return fetch(`http://localhost:3001/pokemons/${id}`, {
+        return axios(`/pokemons/${id}`, {
             method: "DELETE",
         })
             .then((response) => {
@@ -118,20 +113,18 @@ export function resetDeletedState() {
 
 export function editPokemon(id, input) {
     return function (dispatch) {
-        return fetch(`http://localhost:3001/pokemons/${id}`, {
+        return axios(`/pokemons/${id}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify(input),
-        })
-            .then((response) => response.json())
-            .then((data) => {
-                dispatch({
-                    type: EDIT_POKEMON,
-                    payload: data,
-                });
+            data: JSON.stringify(input),
+        }).then((response) => {
+            dispatch({
+                type: EDIT_POKEMON,
+                payload: response.data,
             });
+        });
     };
 }
 
